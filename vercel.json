@@ -2,6 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/index.py": {
+      "runtime": "python3.12",
       "excludeFiles": "{.git/**,.vercel/**,dist/**,guidelines/**,node_modules/**}"
     }
   },

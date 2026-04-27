@@ -16,7 +16,12 @@ export const fetchStockFundamentals = async (
   apiKey?: string,
 ): Promise<StockFundamentals> => {
   const code = ticker.trim().toUpperCase();
-  const apiBase = (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_API_BASE_URL || 'http://localhost:8000';
+  const env = (import.meta as ImportMeta & { env?: Record<string, string> }).env;
+  const apiBase =
+    env?.VITE_API_BASE_URL ||
+    (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+      ? window.location.origin
+      : 'http://localhost:8000');
   const query = apiKey?.trim() ? `?av_key=${encodeURIComponent(apiKey.trim())}` : '';
 
   try {
